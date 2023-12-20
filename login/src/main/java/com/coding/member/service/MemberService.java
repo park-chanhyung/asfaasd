@@ -5,6 +5,7 @@ import com.coding.member.Entity.MemberEntity;
 import com.coding.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -83,15 +84,6 @@ public class MemberService {
         }
         return memberDTOList;
     }
-//    public MemberDTO findById(Long id){
-//        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
-//        if (optionalMemberEntity.isPresent()){
-//            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
-//        }
-//        else {
-//            return  null;
-//        }
-//    }
 
     public MemberDTO findById(String myId) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(myId);

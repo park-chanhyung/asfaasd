@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+
+    <!-- 부트스트랩 CSS 및 Font Awesome 스타일시트 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy5xSTtRZOBojauU8sYtrmMAtvq57I5Zb7" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+    <!-- 부트스트랩 JS 및 Popper.js 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/stylesave.css"/>
+</head>
+<body>
+<form name="reg_frm" action="/member/save" method="post">
+    <h2 class="mb-4">회원가입</h2>
+
+    <div class="form-group">
+        <label for="memberId">아이디:</label>
+        <input type="text" id="memberId" name="memberId" class="form-control" onblur="IdCheck()" required pattern="[a-zA-Z0-9]+" title="알파벳과 숫자만 허용됩니다">
+        <i class="fas fa-user"></i>
+    </div>
+        <p id="check-result"></p>
+
+    <div class="form-group">
+        비밀번호 : <input type="password" name="memberPassword" class="form-control" required>
+        <i class="fas fa-lock"></i>
+    </div>
+
+    <div class="form-group">
+        닉네임 : <input type="text" name="memberName" class="form-control" required>
+        <i class="fas fa-user"></i>
+    </div>
+
+    <div class="form-group">
+        <label for="area_parent">지역:</label>
+        <select id="area_parent" name="parentArea" class="form-control"></select>
+        <i class="fas fa-globe"></i>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">회원가입</button>
+</form>
+</body>
+    <script th:inline="javascript">
+        const IdCheck = () => {
+            const getid = document.getElementById("memberId").value;
+            const checkResult = document.getElementById("check-result");
+            console.log("입력값: ", getid);
+            $.ajax({
+                // 요청방식: post, url: "email-check", 데이터: 이메일
+                type: "post",
+                url: "/member/Id-check",
+                data: {
+                    "memberId": getid
+                },
+                success: function(res) {
+                    console.log("요청성공", res);
+                    if (res == "ok") {
+                        console.log("사용가능한 아이디");
+                        checkResult.style.color = "green";
+                        checkResult.innerHTML = "사용가능한 아이디입니다 !";
+                    } else {
+                        checkResult.style.color = "red";
+                        checkResult.innerHTML = "이미 존재하는 아이디입니다.";
+                        console.log("에러 발생", err);
+                    }
+                },
+                error: function(err) {
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "에러 발생";
+                    console.log("에러 발생", err);
+                }
+            });
+        }
+        var areas = ["서울", "경기", "대전", "대구", "부산"];
+
+        // select 요소 가져오기
+        var selectElement = document.getElementById("area_parent");
+
+        // 배열의 각 요소를 순회하며 option 요소를 생성하여 select에 추가
+        for (var i = 0; i < areas.length; i++) {
+            var optionElement = document.createElement("option");
+            optionElement.value = areas[i];
+            optionElement.text = areas[i];
+            selectElement.add(optionElement);
+        }
+    </script>
+    </html>

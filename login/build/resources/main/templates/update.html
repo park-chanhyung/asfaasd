@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .btn-primary {
+            color: #ffffff;
+            background-color: #4AD395;
+            border-color: #4AD395;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <form action="/member/update" method="post" class="bg-white p-4 rounded">
+        <h2 style="text-align: center;">정보 수정</h2>
+        <input type="hidden" th:value="${updateMember.id}" name="id" class="form-control mb-2">
+        <div class="form-group">
+            아이디 <input type="text" th:value="${updateMember.memberId}" name="memberId" class="form-control mb-2" >
+        </div>
+        <div class="form-group">
+            비밀번호 <input type="text" th:value="${updateMember.memberPassword}" name="memberPassword" class="form-control mb-2">
+        </div>
+        <div class="form-group">
+            닉네임 <input type="text" th:value="${updateMember.memberName}" name="memberName" class="form-control mb-2">
+        </div>
+
+            <select id="area_parent" th:value="${updateMember.parentArea}" name="parentArea" class="form-control mb-2">
+                <!-- Options will be dynamically added using JavaScript -->
+            </select>
+        <input type="submit" value="정보수정" class="btn btn-primary">
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js, jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    var areas = ["서울", "경기", "대전", "대구", "부산"];
+
+    // select 요소 가져오기
+    var selectElement = document.getElementById("area_parent");
+
+    // 배열의 각 요소를 순회하며 option 요소를 생성하여 select에 추가
+    for (var i = 0; i < areas.length; i++) {
+        var optionElement = document.createElement("option");
+        optionElement.value = areas[i];
+        optionElement.text = areas[i];
+        selectElement.add(optionElement);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+    <!-- 부트스트랩 CSS 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .table {
+            max-width: 1000px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .btn-update {
+            color: #ffffff;
+            background-color: #4AD395;
+            border-color: #4AD395;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>내 정보</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>닉네임</th>
+            <th>지역</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${myInfo.memberId}"></td>
+            <td th:text="${myInfo.memberPassword}"></td>
+            <td th:text="${myInfo.memberName}"></td>
+            <td th:text="${myInfo.parentArea}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/member/update" class="btn btn-primary btn-update">내 정보 수정하기</a>
+    <a href="/member/delete/" class="btn btn-danger">회원 탈퇴</a>
+</div>
+
+<!-- 부트스트랩 JS 및 Popper.js, jQuery 추가 -->
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
